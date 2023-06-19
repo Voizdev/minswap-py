@@ -39,9 +39,20 @@ def check_valid_pool_output(utxo: Union[AddressUtxoContentItem, Output]):
         ValueError: No factory token found in utxos.
     """
     # Check to make sure the pool address is correct
-    correct_address: bool = utxo.address == addr.POOL.address.encode()
+    #correct_address: bool = utxo.address == addr.POOL.address.encode()
+    
+    #changed check to iterate over all POOL addresses
+    correct_address = False
+    for add in addr.POOLS:
+        if utxo.address == add.address.encode():
+            correct_address = True
+        
     if not correct_address:
-        message = f"Invalid pool address. Expected {addr.POOL}"
+        #message = f"Invalid pool address. Expected {addr.POOL}"
+        
+        #changed to remove reference to addr.POOL. no reason for it.
+        message = f"Invalid pool address."
+        
         logger.debug(message)
         raise ValueError(message)
 
@@ -311,9 +322,18 @@ def get_pools(
     env = dotenv_values()
     api = blockfrost.BlockFrostApi(env["PROJECT_ID"])
 
-    utxos_raw = api.address_utxos(
-        addr.POOL.address.encode(), gather_pages=True, order="asc", return_type="json"
-    )
+    # utxos_raw = api.address_utxos(
+        # addr.POOL.address.encode(), gather_pages=True, order="asc", return_type="json"
+    # )
+
+    #created a new utxos_raw_partial var. iterates over all the addr.POOLS and builds the utxos_raw out of that.
+    utxos_raw = []
+    for add in addr.POOLS:
+        utxos_raw_partial = api.address_utxos(
+            add.address.encode(), gather_pages=True, order="asc", return_type="json"
+        )
+        utxos_raw = utxos_raw + utxos_raw_partial
+
 
     utxos = AddressUtxoContent.parse_obj(utxos_raw)
 
@@ -354,8 +374,18 @@ def get_pool_in_tx(tx_hash: str) -> Optional[PoolState]:
 
     pool_tx = api.transaction_utxos(tx_hash, return_type="json")
     pool_utxo = None
+    
+    #create a pool address list to check against below
+    pool_addresses = []
+    for add in addr.POOLS:
+        pool_addresses.append(add.bech32)
+    
     for utxo in TxContentUtxo.parse_obj(pool_tx).outputs:
-        if utxo.address == addr.POOL.bech32:
+        # if utxo.address == addr.POOL.bech32:
+            # pool_utxo = utxo
+            # break
+        #changed to check if the utxo.address in in the pool_addresses var which is populated with addr.POOLS
+        if utxo.address in pool_addresses:
             pool_utxo = utxo
             break
 
