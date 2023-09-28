@@ -22,7 +22,10 @@ POOLS = [
     Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxzwccf8ywaly0m99ngq68lus48lmafut7ku9geawu8u6k49suv42qq"), #WMT
     Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxz02znpd777wgl9wwpk0dvdzuxn93mqh82q7vv6s9jn25rws52z94g"), #iUSD
     Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxz2jyskd3y6etkv8ye450545xu6q4jfq5hv4e0uxwkpf8lsq048y90"), #AADA
-    Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxztnqm37tpj0q63s0qns5wfe4flqzqqg55760472n7yt4v8skpaj3k") #SNEK
+    Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxztnqm37tpj0q63s0qns5wfe4flqzqqg55760472n7yt4v8skpaj3k"), #SNEK
+    Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxzfexpwjxduemhljcrgp4sn8zl3udcljp5w0027g06ygw09s9y05av"), #HUNT
+    Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxzfpahn0eymy6pz4yr4mvptlpjv9eh2swz0u0hjj4qp439kq4064e4"), #JPG
+    Address(bech32="addr1z8snz7c4974vzdpxu65ruphl3zjdvtxw8strf2c2tmqnxzf6g882n6sa2gxnk42heavu7uddl5jdl0ektf5f204mmc7s3ykuf9") #FACT
 ]
 
 ORDER = Address(bech32="addr1wxn9efv2f6w82hagxqtn62ju4m293tqvw0uhmdl64ch8uwc0h43gt")
